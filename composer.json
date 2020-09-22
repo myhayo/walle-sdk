@@ -1,0 +1,32 @@
+{
+    "name": "myhayo/walle-sdk",
+    "description": "php sdk of walle-server",
+    "type": "library",
+    "homepage": "https://github.com/Yyyyyoly/walle-sdk",
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/framework": ">=5.6.0"
+    },
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "wangyaoguang",
+            "email": "wangyaoguang@myhayo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Myhayo\\Walle\\": "src/"
+        }
+    },
+    "extra": {
+        "walle": {
+            "providers": [
+                "Myhayo\\Walle\\Providers\\WalleServiceProvider"
+            ],
+            "aliases": {
+                "Walle": "Myhayo\\Walle\\Facades\\Walle"
+            }
+        }
+    }
+}
