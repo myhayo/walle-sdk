@@ -14,9 +14,9 @@ class WalleServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // 单例绑定服务
-        $this->app->singleton('walle', function ($app) {
-            return new WalleService($app['config']);
+        // 绑定服务
+        $this->app->instance('walle', function ($app) {
+            return new WalleService();
         });
     }
 
