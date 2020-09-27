@@ -36,10 +36,17 @@ class WalleService
             $errMsg = "请先设置基包tag";
         }
 
-        $result = $this->postRequest($url, [
-            'base_tag' => $basePkgTag,
-            'apk_file' => file_get_contents($filePath),
-        ]);
+        $multipartData = [
+            [
+                'name'     => 'base_tag',
+                'contents' => $basePkgTag,
+            ],
+            [
+                'name'     => 'apk_file',
+                'contents' => fopen($filePath, 'r'),
+            ],
+        ];
+        $result = $this->postRequest($url, $multipartData);
 
         if (empty($result) || $result['code'] != 0) {
             $errMsg = $result['error']['message'] ?? '上传基包文件失败';
@@ -105,11 +112,21 @@ class WalleService
 
         $url = config('walle.walle_service') . 'api/v1/internal/' . config('walle.app_tag') . '/base-pkg/' . $basePkgTag . '/extra-pkg';
 
-        $result = $this->postRequest($url, [
-            'channels'  => $channelList,
-            'params'    => $params,
-            'is_newest' => $isNewest,
-        ]);
+        $multipartData = [
+            [
+                'name'     => 'channels',
+                'contents' => $channelList,
+            ],
+            [
+                'name'     => 'params',
+                'contents' => $params,
+            ],
+            [
+                'name'     => 'is_newest',
+                'contents' => $isNewest,
+            ],
+        ];
+        $result = $this->postRequest($url, $multipartData);
 
         if (empty($result) || $result['code'] != 0) {
             $errMsg = $result['error']['message'] ?? '扩展包文件打包失败';
@@ -198,7 +215,6 @@ class WalleService
     }
 
 
-
     /**
      * 获取分享包url
      *
@@ -248,7 +264,7 @@ class WalleService
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    private function postRequest($url, $data, $params_type = 'form_params')
+    private function postRequest($url, $data, $params_type = 'multipart')
     {
         $client = new Client();
         $options = [
@@ -258,8 +274,8 @@ class WalleService
             'timeout' => 100,
         ];
 
-        if ($params_type == 'form_params') {
-            $options['form_params'] = $data;
+        if ($params_type == 'multipart') {
+            $options['multipart'] = $data;
         } elseif ($params_type == 'json') {
             $options['json'] = $data;
         }
