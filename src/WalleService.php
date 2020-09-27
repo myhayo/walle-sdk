@@ -159,13 +159,15 @@ class WalleService
     /**
      * 分页查询渠道扩展包最新指向列表
      *
-     * @param $page
-     * @param $limit
+     * @param        $page
+     * @param        $limit
+     * @param string $channel 按渠道查询【如果有】
+     * @param string $baseTag 按基包tag查询【如果有】
      *
      * @return array
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getNewestExtraPkgList($page, $limit)
+    public function getNewestExtraPkgList($page, $limit, $channel = '', $baseTag = '')
     {
         $list = [
             'list'  => [],
@@ -174,6 +176,14 @@ class WalleService
 
         $url = config('walle.walle_service') . 'api/v1/internal/' . config('walle.app_tag') . '/extra-pkg/newest';
         $url .= '?page=' . $page . '&limit=' . $limit;
+
+        if (!empty($channel)) {
+            $url .= '&channel=' . $channel;
+        }
+
+        if (!empty($baseTag)) {
+            $url .= '&base_tag=' . $baseTag;
+        }
 
         $result = $this->getRequest($url);
         if (!empty($result) && $result['code'] == 0) {
@@ -186,6 +196,7 @@ class WalleService
 
         return $list;
     }
+
 
 
     /**
