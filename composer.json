@@ -21,7 +21,7 @@
         }
     },
     "extra": {
-        "walle": {
+        "laravel": {
             "providers": [
                 "Myhayo\\Walle\\Providers\\WalleServiceProvider"
             ],

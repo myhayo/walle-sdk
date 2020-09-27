@@ -15,7 +15,7 @@ class WalleServiceProvider extends ServiceProvider
     public function register()
     {
         // 绑定服务
-        $this->app->instance('walle', function ($app) {
+        $this->app->singleton('walle', function ($app) {
             return new WalleService();
         });
     }
@@ -28,7 +28,7 @@ class WalleServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/config/walle.php' => config_path('walle.php'), // 发布配置文件到 laravel 的config 下
+            __DIR__ . '/../config/walle.php' => config_path('walle.php'), // 发布配置文件到 laravel 的config 下
         ]);
     }
 }

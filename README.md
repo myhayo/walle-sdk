@@ -9,7 +9,7 @@ composer require myhayo/walle-sdk
 ```
 - 然后运行下面的命令来发布资源：
 ```
-php artisan vendor --provider="Myhayo\Walle\Provider\WalleServiceProvider"
+php artisan vendor:publish --provider="Myhayo\Walle\Providers\WalleServiceProvider"
 ```
 - 修改对应的env配置：
 ```
