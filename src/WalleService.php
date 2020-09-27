@@ -115,7 +115,7 @@ class WalleService
         $multipartData = [
             [
                 'name'     => 'channels',
-                'contents' => $channelList,
+                'contents' => json_encode($channelList),
             ],
             [
                 'name'     => 'params',
