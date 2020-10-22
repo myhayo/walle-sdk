@@ -131,6 +131,9 @@ class WalleService
         if (empty($result) || $result['code'] != 0) {
             $errMsg = $result['error']['message'] ?? '扩展包文件打包失败';
         }
+        if ($result['data']['failList']) {
+            $errMsg = implode(',', $result['data']['failList']) . '渠道版本重复操作，打包失败';
+        }
 
         return $errMsg;
     }
@@ -213,7 +216,6 @@ class WalleService
 
         return $list;
     }
-
 
 
     /**
