@@ -31,7 +31,7 @@ class BasePkg
      */
     public function setDefaultBasePkgTag($appVersion)
     {
-        $this->basePkgTag = 'v_' . $appVersion;
+        $this->basePkgTag = 'v' . $appVersion;
     }
 
 
