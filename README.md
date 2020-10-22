@@ -39,13 +39,18 @@ FUNCTIONS
 $basePkg = new BasePkg();
 $basePkg->setDefinedBasePkgTag("****"); 
 // or $basePkg->setDefaultBasePkgTag(10); 
-walle()->uploadBasePkg($basePkg, $filePath)  
+$walle->uploadBasePkg($basePkg, $filePath)  
 ```
 
 
 - 分页查询基包列表:  
 ```
-walle()->getBasePkgList($page, $limit) 
+$walle->getBasePkgList($page, $limit) 
+```
+
+- 查询最新版本的基包tag:  
+```
+$walle->getNewestBasePkg() 
 ```
 
 - 指定基包和渠道，生成对应渠道扩展包 
@@ -58,13 +63,13 @@ generateExtraPkg($basePkg, ['official','vivo'],  1, 'pid=123')
   
 - 分页查询[指定/所有]基包渠道扩展包列表: 
 ```
-walle()->getExtraPkgList(1, 10, 'your_baseTag') 
+$walle->getExtraPkgList(1, 10, 'your_baseTag') 
 ``` 
 
   
 - 分页查询最新渠道扩展包列表:  
 ```
-walle()->getNewestExtraPkgList(1, 10)
+$walle->getNewestExtraPkgList(1, 10)
 ```
 
 
@@ -81,7 +86,7 @@ $extraPkg->setChannel('official')
 $extraPkg->setParams('pid=123')
 // or $basePkg->setDefaultExtraPkgTag($basePkg, 'official','pid=123'); 
 
-walle()->getShareUrl($basePkg,$extraPkg) 
+$walle->getShareUrl($basePkg,$extraPkg) 
 ```
  
 

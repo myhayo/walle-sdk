@@ -91,6 +91,27 @@ class WalleService
 
 
     /**
+     * 获取最新的基包信息
+     *
+     * @return array|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getNewestBasePkg()
+    {
+        $basePkg = [];
+
+        $url = config('walle.walle_service') . 'api/v1/internal/' . config('walle.app_tag') . '/base-pkg/newest';
+
+        $result = $this->getRequest($url);
+        if (!empty($result) && $result['code'] == 0) {
+            $basePkg = $result['data']['base_info'];
+        }
+
+        return $basePkg;
+    }
+
+
+    /**
      * 指定基包，生成对应的渠道扩展包
      *
      * @param BasePkg $basePkg
@@ -130,10 +151,12 @@ class WalleService
 
         if (empty($result) || $result['code'] != 0) {
             $errMsg = $result['error']['message'] ?? '扩展包文件打包失败';
+        } else {
+            if ($result['data']['failList']) {
+                $errMsg = implode(',', $result['data']['failList']) . '渠道版本重复操作，打包失败';
+            }
         }
-        if ($result['data']['failList']) {
-            $errMsg = implode(',', $result['data']['failList']) . '渠道版本重复操作，打包失败';
-        }
+
 
         return $errMsg;
     }
