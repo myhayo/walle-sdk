@@ -116,6 +116,25 @@ class ExtraPkg
      */
     public static function formatExtraPkgInfo($val)
     {
+        return [
+            'base_tag'  => $val['base_tag'],
+            'extra_tag' => $val['extra_tag'],
+            'channel'   => $val['channel'],
+            'oss_url'   => $val['oss_url'],
+            'status'    => $val['status'],
+        ];
+    }
+
+
+    /**
+     * 格式化最新渠道扩展包信息
+     *
+     * @param      $val
+     *
+     * @return array
+     */
+    public static function formatNewestExtraPkgInfo($val)
+    {
         // 此地址永远指向最新包，同一渠道都一样
         $apkUrl = "";
         if ($val['apk_url']) {
@@ -123,12 +142,11 @@ class ExtraPkg
         }
 
         return [
-            'base_tag'  => $val['base_tag'],
-            'extra_tag' => $val['extra_tag'],
-            'channel'   => $val['channel'],
-            'apk_url'   => $apkUrl,
-            'oss_url'   => $val['oss_url'],
-            'status'    => $val['status'],
+            'base_tag'   => $val['base_tag'],
+            'extra_tag'  => $val['extra_tag'],
+            'channel'    => $val['channel'],
+            'apk_url'    => $apkUrl,
+            'pre_status' => $val['pre_status'],
         ];
     }
 }

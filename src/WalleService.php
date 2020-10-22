@@ -205,7 +205,7 @@ class WalleService
         $result = $this->getRequest($url);
         if (!empty($result) && $result['code'] == 0) {
             foreach ($result['data']['list'] as $val) {
-                $list['list'][] = ExtraPkg::formatExtraPkgInfo($val);
+                $list['list'][] = ExtraPkg::formatNewestExtraPkgInfo($val);
             }
 
             $list['total'] = $result['data']['total'];
